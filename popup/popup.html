@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wise-Sync Guest Checkout Helper</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1 id="popup-title">Wise-Sync Guest Checkout Helper</h1>
+            <p id="company-name">Checking the current page…</p>
+        </header>
+
+        <section id="unlock-section" hidden>
+            <label for="unlock-password">Unlock password</label>
+            <input
+                id="unlock-password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Enter your extension password"
+            >
+            <button id="unlock-button" type="button">Unlock</button>
+        </section>
+
+        <section id="unlocked-section" hidden>
+            <div class="unlocked-row">
+                <span class="unlock-indicator"></span>
+                <span>Unlocked for this browser session</span>
+                <button id="lock-extension" type="button" class="lock-button">
+                    Lock
+                </button>
+            </div>
+        </section>
+
+        <section id="unsupported-section" hidden>
+            <div class="unsupported-card">
+                <h2>Unavailable on this page</h2>
+                <p>
+                    Open a supported Wise-Sync guest checkout contact or billing
+                    address page to use this add-on.
+                </p>
+            </div>
+        </section>
+
+        <section id="status" role="status" aria-live="polite"></section>
+
+        <section id="contacts-section" hidden>
+            <div class="contacts-heading">
+                <h2 id="list-heading">Results</h2>
+                <span id="contact-count"></span>
+            </div>
+
+            <div id="contact-search-container" hidden>
+                <label for="contact-search">Search</label>
+                <input
+                    id="contact-search"
+                    type="search"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div id="contacts-list"></div>
+        </section>
+
+        <footer>
+            <button id="open-settings" type="button" class="text-button">
+                Extension Settings
+            </button>
+        </footer>
+    </main>
+
+    <script src="../lib/crypto.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

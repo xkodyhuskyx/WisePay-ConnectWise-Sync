@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wise-Sync Guest Checkout Helper Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <main class="settings-container">
+        <header>
+            <h1>Wise-Sync Guest Checkout Helper Settings</h1>
+            <p>
+                Configure your local ConnectWise connection. Credentials are encrypted in this Firefox profile using the unlock password you provide.
+            </p>
+        </header>
+
+        <form id="settings-form">
+            <div class="field">
+                <label for="company-id">ConnectWise Company ID</label>
+                <input id="company-id" type="text" autocomplete="off" required>
+            </div>
+
+            <div class="field">
+                <label for="public-key">Public Key</label>
+                <input id="public-key" type="text" autocomplete="off" required>
+            </div>
+
+            <div class="field">
+                <label for="private-key">Private Key</label>
+                <input id="private-key" type="password" autocomplete="new-password" required>
+            </div>
+
+            <div class="field">
+                <label for="client-id">Client ID</label>
+                <input id="client-id" type="text" autocomplete="off" required>
+            </div>
+
+            <div class="field">
+                <label for="base-url">Base URL</label>
+                <input
+                    id="base-url"
+                    type="url"
+                    value="https://na.myconnectwise.net"
+                    autocomplete="off"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="api-path">API Path</label>
+                <input
+                    id="api-path"
+                    type="text"
+                    value="/v4_6_release/apis/3.0"
+                    autocomplete="off"
+                    required
+                >
+            </div>
+
+            <hr>
+
+            <div class="field">
+                <label for="unlock-password">Create Unlock Password</label>
+                <input
+                    id="unlock-password"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="5"
+                    required
+                >
+                <small>Use at least 5 characters.</small>
+            </div>
+
+            <div class="field">
+                <label for="confirm-password">Confirm Unlock Password</label>
+                <input
+                    id="confirm-password"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="5"
+                    required
+                >
+            </div>
+
+            <label class="checkbox-label">
+                <input id="show-secrets" type="checkbox">
+                Show private key and unlock passwords
+            </label>
+
+            <div class="actions">
+                <button type="submit">Encrypt and Save Settings</button>
+                <button id="clear-settings" type="button" class="secondary">
+                    Clear Saved Settings
+                </button>
+            </div>
+
+            <div id="status" role="status" aria-live="polite"></div>
+        </form>
+
+        <section class="security-warning">
+            <h2>Security notice</h2>
+            <p>
+                Credentials are encrypted locally, but this does not protect
+                against malware or someone who already controls your operating
+                system account. Use this only on trusted computers.
+            </p>
+        </section>
+    </main>
+
+    <script src="../lib/crypto.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>
