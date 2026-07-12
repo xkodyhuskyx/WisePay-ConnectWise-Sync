@@ -1,0 +1,81 @@
+{
+  "manifest_version": 3,
+  "name": "Wise-Sync Guest Checkout Helper",
+  "short_name": "Wise-Sync Helper",
+  "version": "1.3.2",
+  "description": "Securely fills Wise-Sync guest checkout contact and billing fields using matching ConnectWise company contacts and addresses.",
+  "author": "Jeffery Hancock",
+  "developer": {
+    "name": "The Floofy Fox LLC",
+    "url": "https://www.thefloofyfox.com/"
+  },
+  "homepage_url": "https://www.thefloofyfox.com/",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://secure2.wise-sync.com/npe*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://secure2.wise-sync.com/*"
+      ],
+      "js": [
+        "content/wise-sync-input-listener.js"
+      ],
+      "css": [
+        "content/wise-sync-input-listener.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/popup-window-handler.js",
+      "background/background.js"
+    ]
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Open Wise-Sync Guest Checkout Helper",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "connectwise-to-wisepay@thefloofyfox.com",
+      "strict_min_version": "140.0",
+      "update_url": "https://www.thefloofyfox.com/downloads/browser-extensions/firefox/updates.json",
+      "data_collection_permissions": {
+        "required": [
+          "authenticationInfo",
+          "personallyIdentifyingInfo",
+          "websiteContent"
+        ]
+      }
+    }
+  }
+}

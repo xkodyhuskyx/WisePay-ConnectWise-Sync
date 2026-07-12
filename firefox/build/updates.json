@@ -1,0 +1,26 @@
+{
+  "addons": {
+    "connectwise-to-wisepay@thefloofyfox.com": {
+      "updates": [
+        {
+          "version": "1.3.1",
+          "update_link": "https://www.thefloofyfox.com/downloads/browser-extensions/firefox/connectwise-to-wisepay/connectwise-to-wisepay-1.3.1.xpi",
+          "applications": {
+            "gecko": {
+              "strict_min_version": "140.0"
+            }
+          }
+        },
+        {
+          "version": "1.3.2",
+          "update_link": "https://www.thefloofyfox.com/downloads/browser-extensions/firefox/connectwise-to-wisepay/connectwise-to-wisepay-1.3.2.xpi",
+          "applications": {
+            "gecko": {
+              "strict_min_version": "140.0"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

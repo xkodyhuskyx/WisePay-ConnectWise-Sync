@@ -1,0 +1,167 @@
+.wsgch-picker {
+    position: fixed;
+    z-index: 2147483647;
+    width: 300px;
+    max-height: 348px;
+    padding: 12px;
+    overflow: hidden;
+    border: 1px solid #343a44;
+    border-radius: 10px;
+    background: #101318;
+    color: #f4f5f7;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.48);
+    font: 12px/1.4 Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.wsgch-heading {
+    padding-right: 28px;
+    color: #f4f5f7;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.wsgch-close {
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: #8e96a2;
+    font: 20px/1 sans-serif;
+    cursor: pointer;
+}
+
+.wsgch-close:hover {
+    background: #1d222a;
+    color: #ffffff;
+}
+
+.wsgch-search {
+    width: 100%;
+    margin: 10px 0 8px;
+    padding: 8px 9px;
+    border: 1px solid #343a44;
+    border-radius: 7px;
+    outline: none;
+    background: #171b21;
+    color: #f4f5f7;
+    font: inherit;
+}
+
+.wsgch-search:focus {
+    border-color: #6c7cff;
+    box-shadow: 0 0 0 3px rgba(108, 124, 255, 0.16);
+}
+
+.wsgch-list {
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.wsgch-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin: 0 0 6px;
+    padding: 9px 10px;
+    border: 1px solid #292f38;
+    border-radius: 7px;
+    background: #15191f;
+    color: #edf0f4;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.wsgch-contact:hover {
+    border-color: #4a5361;
+    background: #1c2129;
+}
+
+.wsgch-contact-name {
+    min-width: 0;
+    overflow: hidden;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wsgch-contact-details {
+    display: grid;
+    min-width: 0;
+}
+
+.wsgch-contact-phone {
+    margin-top: 2px;
+    color: #929ba7;
+    font-size: 10px;
+}
+
+.wsgch-select-label {
+    color: #9da7ff;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.wsgch-message {
+    margin: 12px 0 0;
+    color: #a2a9b3;
+}
+
+.wsgch-error {
+    color: #ff9292;
+}
+
+@media (prefers-color-scheme: light) {
+    .wsgch-picker {
+        border-color: #cfd4dc;
+        background: #ffffff;
+        color: #20242a;
+        box-shadow: 0 18px 50px rgba(31, 38, 50, 0.2);
+    }
+
+    .wsgch-heading {
+        color: #20242a;
+    }
+
+    .wsgch-close:hover {
+        background: #eef0f3;
+        color: #20242a;
+    }
+
+    .wsgch-search {
+        border-color: #cbd1d9;
+        background: #ffffff;
+        color: #20242a;
+    }
+
+    .wsgch-contact {
+        border-color: #d8dce3;
+        background: #f8f9fb;
+        color: #20242a;
+    }
+
+    .wsgch-contact:hover {
+        border-color: #b8bec8;
+        background: #eef0f3;
+    }
+
+    .wsgch-contact-phone {
+        color: #6f7782;
+    }
+
+    .wsgch-message {
+        color: #626a75;
+    }
+
+    .wsgch-error {
+        color: #b4233a;
+    }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wise-Sync Guest Checkout Helper</title>
+    <script src="../lib/browser-api.js"></script>
+    <script src="../lib/theme.js"></script>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <main>
+        <header>
+            <div class="title-row">
+                <h1 id="popup-title">Wise-Sync Guest Checkout Helper</h1>
+                <section id="unlocked-section" hidden>
+                    <button id="lock-extension" type="button" class="lock-button">
+                        Lock
+                    </button>
+                </section>
+            </div>
+            <p id="company-name">Checking the current page…</p>
+        </header>
+
+        <section id="setup-required-section" hidden>
+            <div class="setup-required-card">
+                <h2 id="setup-required-title">Setup Required</h2>
+                <p id="setup-required-message">
+                    You must set an add-on password and configure your
+                    ConnectWise API credentials before using this add-on.
+                </p>
+                <button id="configure-addon" type="button">
+                    Open Settings
+                </button>
+            </div>
+        </section>
+
+        <section id="unlock-section" hidden>
+            <label for="unlock-password">Unlock password</label>
+            <input
+                id="unlock-password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Enter your extension password"
+            >
+            <button id="unlock-button" type="button">Unlock</button>
+        </section>
+
+        <section id="unsupported-section" hidden>
+            <div class="unsupported-card">
+                <p id="unsupported-message">This page is not supported.</p>
+            </div>
+        </section>
+
+        <section id="status" role="status" aria-live="polite"></section>
+
+        <section id="contacts-section" hidden>
+            <div class="contacts-heading">
+                <h2 id="list-heading">Results</h2>
+                <span id="contact-count"></span>
+            </div>
+
+            <div id="contact-search-container" hidden>
+                <label for="contact-search">Search</label>
+                <input
+                    id="contact-search"
+                    type="search"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div id="contacts-list"></div>
+        </section>
+
+        <footer>
+            <div class="footer-meta">
+                <span id="developer-name"></span>
+                <span class="version-controls">
+                    <span id="addon-version"></span>
+                    <button id="theme-toggle" type="button"
+                            aria-label="Theme: Auto" title="Theme: Auto">
+                        <span aria-hidden="true">◐</span>
+                    </button>
+                </span>
+            </div>
+        </footer>
+    </main>
+
+    <script src="../lib/crypto.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

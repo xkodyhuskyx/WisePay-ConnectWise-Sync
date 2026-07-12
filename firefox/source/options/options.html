@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wise-Sync Guest Checkout Helper Settings</title>
+    <script src="../lib/theme.js"></script>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main id="settings-container" class="settings-container password-state-loading">
+    <header>
+        <h1>Wise-Sync Guest Checkout Helper Settings</h1>
+        <p>
+            Configure your local ConnectWise connection. Credentials are encrypted in this Firefox profile using the
+            unlock password you provide.
+        </p>
+    </header>
+
+    <section id="password-setup-gate" class="password-setup-gate" hidden>
+        <h2>Create An Unlock Password</h2>
+        <p>
+            Set a password before configuring the add-on. It encrypts your
+            ConnectWise credentials and is never stored directly.
+        </p>
+        <form id="password-setup-form">
+            <div class="field">
+                <label for="setup-password">Unlock Password</label>
+                <div class="input-with-toggle">
+                    <input id="setup-password" type="password"
+                           autocomplete="new-password" minlength="5" required>
+                    <button class="visibility-toggle" type="button"
+                            data-target="setup-password" aria-pressed="false">Show</button>
+                </div>
+                <small>Use at least 5 characters.</small>
+            </div>
+            <div class="field">
+                <label for="setup-password-confirmation">Confirm Password</label>
+                <div class="input-with-toggle">
+                    <input id="setup-password-confirmation" type="password"
+                           autocomplete="new-password" minlength="5" required>
+                    <button class="visibility-toggle" type="button"
+                            data-target="setup-password-confirmation"
+                            aria-pressed="false">Show</button>
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit">Create Password</button>
+            </div>
+        </form>
+    </section>
+
+    <details class="api-key-guide">
+        <summary>
+            <span>Guide: How To Create ConnectWise API Credentials</span>
+            <small>Expand for step-by-step instructions</small>
+        </summary>
+
+        <div class="guide-content">
+            <p class="guide-intro">
+                Create a dedicated, limited-access API member before completing
+                the settings below.
+            </p>
+
+        <ol class="guide-steps">
+            <li>
+                <h3>Create A Security Role <span>Optional · Recommended</span></h3>
+                <ol>
+                    <li>Go to <strong>System &gt; Security Roles</strong>.</li>
+                    <li>Click the <strong>+ (New Item)</strong> icon.</li>
+                    <li>
+                        Enter a descriptive Role ID, such as
+                        <code>WiseSync_Helper_API</code>, and save it.
+                    </li>
+                    <li>
+                        Expand the permission modules and grant only the
+                        access this integration needs. This helper reads
+                        company, contact, and company-site information.
+                    </li>
+                    <li>Click <strong>Save</strong>.</li>
+                </ol>
+            </li>
+            <li>
+                <h3>Create The API Member</h3>
+                <ol>
+                    <li>
+                        Go to <strong>System &gt; Members</strong>, then open
+                        the <strong>API Members</strong> tab.
+                    </li>
+                    <li>Click the <strong>+ (New Item)</strong> icon.</li>
+                    <li>
+                        Enter a Member ID and Member Name, then select your
+                        new security role for <strong>Role ID</strong>.
+                    </li>
+                    <li>
+                        Set <strong>Level</strong> to
+                        <strong>Corporate (Level 1)</strong> and save.
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>Generate The API Keys</h3>
+                <ol>
+                    <li>Open the new API Member profile.</li>
+                    <li>
+                        Open the <strong>API Keys</strong> tab and click the
+                        <strong>+ (New Item)</strong> icon.
+                    </li>
+                    <li>
+                        Enter a description, such as
+                        <code>Wise-Sync Guest Checkout Helper</code>, and save.
+                    </li>
+                    <li>
+                        Copy the displayed <strong>Public Key</strong> and
+                        <strong>Private Key</strong> into the fields below.
+                    </li>
+                </ol>
+                <aside class="private-key-warning">
+                    <strong>Save the private key immediately.</strong>
+                    ConnectWise displays it only once. It cannot be viewed again
+                    after you close or refresh the page.
+                </aside>
+            </li>
+            <li>
+                <h3>Create A Private Client ID</h3>
+                <ol>
+                    <li>
+                        Open the official
+                        <a href="https://developer.connectwise.com/ClientID"
+                           target="_blank" rel="noopener noreferrer">
+                            ConnectWise Developer Network
+                        </a>
+                        and log in, or register for a developer account using
+                        your corporate email address.
+                    </li>
+                    <li>
+                        Open the <strong>Client ID</strong> or
+                        <strong>ClientID</strong> tab and choose
+                        <strong>Create New Integration</strong>.
+                    </li>
+                    <li>
+                        Enter a recognizable integration name and describe
+                        this helper as an internal Wise-Sync checkout tool.
+                    </li>
+                    <li>
+                        For <strong>Integration Type</strong>, always select
+                        <strong>Private</strong>. Select
+                        <strong>Manage (PSA)</strong> for the product and enter
+                        your administrator or developer email as the technical
+                        contact.
+                    </li>
+                    <li>
+                        Submit the request. Copy the generated Client ID GUID
+                        from your active integrations list and paste it into
+                        the <strong>Client ID</strong> field below. It may take
+                        up to an hour to appear if ConnectWise reviews the
+                        request manually.
+                    </li>
+                </ol>
+            </li>
+        </ol>
+
+        </div>
+    </details>
+
+    <section class="security-warning">
+        <h2>Security Notice</h2>
+        <p>
+            Credentials are encrypted locally, but this does not protect
+            against malware or someone who already controls your operating
+            system account. Use this only on trusted computers.
+        </p>
+    </section>
+
+    <form id="settings-form">
+        <div class="field">
+            <label for="company-id">ConnectWise Company ID</label>
+            <input id="company-id" type="text" autocomplete="off" required>
+            <small>Your unique ConnectWise company identifier.</small>
+        </div>
+
+        <div class="field">
+            <label for="public-key">Public Key</label>
+            <input id="public-key" type="text" autocomplete="off" required>
+            <small>Your ConnectWise API public key for authentication.</small>
+        </div>
+
+        <div class="field">
+            <label for="private-key">Private Key</label>
+            <div class="input-with-toggle">
+                <input id="private-key" type="password" autocomplete="new-password" required>
+                <button class="visibility-toggle" type="button"
+                        data-target="private-key" aria-pressed="false">
+                    Show
+                </button>
+            </div>
+            <small>Your ConnectWise API private key for authentication.</small>
+        </div>
+
+        <div class="field">
+            <label for="client-id">Client ID</label>
+            <div class="input-with-toggle">
+                <input id="client-id" type="password" autocomplete="off" required>
+                <button class="visibility-toggle" type="button"
+                        data-target="client-id" aria-pressed="false">
+                    Show
+                </button>
+            </div>
+            <small>Your ConnectWise API client ID.</small>
+        </div>
+
+        <div class="field">
+            <label for="base-url">Base URL</label>
+            <input
+                    id="base-url"
+                    type="url"
+                    value="https://api-na.myconnectwise.net"
+                    autocomplete="off"
+                    required
+            >
+            <small>The base URL for your ConnectWise API region.</small>
+        </div>
+
+        <div class="field">
+            <label for="api-path">API Path</label>
+            <input
+                    id="api-path"
+                    type="text"
+                    value="/v4_6_release/apis/3.0"
+                    autocomplete="off"
+                    required
+            >
+            <small>The API version path for ConnectWise requests.</small>
+        </div>
+
+        <div class="actions">
+            <button id="test-connection" type="button" class="secondary">
+                Test Connection
+            </button>
+            <button type="submit">Save Changes</button>
+        </div>
+
+        <div id="status" role="status" aria-live="polite"></div>
+    </form>
+
+    <section class="password-section" aria-labelledby="password-section-title">
+        <div class="section-heading">
+            <h2 id="password-section-title">Unlock Password</h2>
+            <p>
+                Create an unlock password during initial setup or change it
+                later without re-entering the ConnectWise API credentials.
+            </p>
+        </div>
+
+        <form id="password-form">
+            <div class="field current-password-field">
+                <label for="current-password">Current Unlock Password</label>
+                <div class="input-with-toggle">
+                    <input id="current-password" type="password"
+                           autocomplete="current-password" minlength="5">
+                    <button class="visibility-toggle" type="button"
+                            data-target="current-password" aria-pressed="false">
+                        Show
+                    </button>
+                </div>
+                <small>Leave blank only when setting up the add-on for the first time.</small>
+            </div>
+
+            <div class="field">
+                <label for="unlock-password">New Unlock Password</label>
+                <div class="input-with-toggle">
+                    <input id="unlock-password" type="password"
+                           autocomplete="new-password" minlength="5">
+                    <button class="visibility-toggle" type="button"
+                            data-target="unlock-password" aria-pressed="false">
+                        Show
+                    </button>
+                </div>
+                <small>Use at least 5 characters.</small>
+            </div>
+
+            <div class="field">
+                <label for="confirm-password">Confirm New Password</label>
+                <div class="input-with-toggle">
+                    <input id="confirm-password" type="password"
+                           autocomplete="new-password" minlength="5">
+                    <button class="visibility-toggle" type="button"
+                            data-target="confirm-password" aria-pressed="false">
+                        Show
+                    </button>
+                </div>
+                <small>Re-enter the new unlock password.</small>
+            </div>
+
+            <div class="actions">
+                <button type="submit">Change Password</button>
+            </div>
+            <div id="password-status" role="status" aria-live="polite"></div>
+        </form>
+    </section>
+
+    <section class="theme-section" aria-labelledby="theme-section-title">
+        <div>
+            <h2 id="theme-section-title">Theme</h2>
+            <p>Choose a theme or follow the browser color preference.</p>
+        </div>
+        <div class="theme-options" role="group" aria-label="Theme Preference">
+            <button type="button" data-theme-option="auto" aria-pressed="false">
+                <span aria-hidden="true">◐</span> Auto
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false">
+                <span aria-hidden="true">☾</span> Dark
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false">
+                <span aria-hidden="true">☀</span> Light
+            </button>
+        </div>
+    </section>
+
+    <section class="popup-behavior-section"
+             aria-labelledby="popup-behavior-title">
+        <div class="section-heading">
+            <h2 id="popup-behavior-title">ConnectWise Popup Behavior</h2>
+            <p>
+                Open popups created by the configured ConnectWise site or its
+                eligible embedded frames as normal browser tabs.
+            </p>
+        </div>
+        <form id="popup-behavior-form">
+            <label class="toggle-setting" for="popup-to-tab-enabled">
+                <input id="popup-to-tab-enabled" type="checkbox">
+                <span>
+                    <strong>Open Matching Popups As Tabs</strong>
+                    <small>A fallback move may briefly show the popup first.</small>
+                </span>
+            </label>
+            <div class="field">
+                <label for="connectwise-popup-url">ConnectWise URL</label>
+                <input id="connectwise-popup-url" type="text"
+                       value="https://na.myconnectwise.net/"
+                       autocomplete="url" spellcheck="false">
+                <small>
+                    Enter the ConnectWise source URL where popups originate.
+                </small>
+            </div>
+            <div class="actions">
+                <button type="submit">Save Popup Behavior</button>
+            </div>
+            <div id="popup-behavior-status" role="status"
+                 aria-live="polite"></div>
+        </form>
+    </section>
+
+    <section class="danger-zone" aria-labelledby="danger-zone-title">
+        <div>
+            <h2 id="danger-zone-title">Danger Zone</h2>
+            <p>
+                Remove saved credentials, end the unlocked session, and clear
+                all cached ConnectWise data from this Firefox profile.
+            </p>
+        </div>
+        <button id="reset-addon" type="button" class="danger">
+            Reset Add-on
+        </button>
+    </section>
+
+    <dialog id="save-password-dialog" class="password-dialog">
+        <form id="save-password-form">
+            <div class="dialog-heading">
+                <h2>Confirm Your Password</h2>
+                <p>Enter the add-on password to encrypt and save these credentials.</p>
+            </div>
+            <div class="field">
+                <label for="save-password">Add-on Password</label>
+                <div class="input-with-toggle">
+                    <input id="save-password" type="password"
+                           autocomplete="current-password" required>
+                    <button class="visibility-toggle" type="button"
+                            data-target="save-password" aria-pressed="false">Show</button>
+                </div>
+            </div>
+            <div class="dialog-actions">
+                <button id="cancel-save-password" type="button" class="secondary">
+                    Cancel
+                </button>
+                <button type="submit">Encrypt and Save</button>
+            </div>
+        </form>
+    </dialog>
+</main>
+
+<script src="../lib/crypto.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

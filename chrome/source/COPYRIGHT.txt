@@ -1,0 +1,5 @@
+Copyright (c) 2026 The Floofy Fox LLC. All rights reserved.
+
+Wise-Sync Guest Checkout Helper and its original source code, interface,
+documentation, and artwork are owned by The Floofy Fox LLC except where
+third-party rights are otherwise identified.
